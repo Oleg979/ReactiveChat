@@ -1,10 +1,8 @@
-var app = require('express')()
+var app = require('express')() .set('view engine', 'ejs')  .get('/', (req, res) => res.render('index.ejs'))
 var http = require('http').Server(app)
 var io = require('socket.io')(http)
 
-app.get('/', (req, res) => {
-    res.sendFile('./index.html')
-})
+
 
 io.on('connection', (socket) => {
 
