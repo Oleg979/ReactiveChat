@@ -3,7 +3,7 @@ var http = require('http').Server(app)
 var io = require('socket.io')(http)
 
 app.get('/', (req, res) => {
-    res.sendFile('index.html')
+    res.sendFile('./index.html')
 })
 
 io.on('connection', (socket) => {
