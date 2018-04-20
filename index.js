@@ -1,8 +1,10 @@
-var app = require('express')() .set('view engine', 'ejs')  .get('/', (req, res) => res.render('index.ejs'))
+var app = require('express')()
 var http = require('http').Server(app)
 var io = require('socket.io')(http)
 
-
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html')
+})
 
 io.on('connection', (socket) => {
 
@@ -28,8 +30,5 @@ io.on('connection', (socket) => {
 
 })
 
-var port = process.env.PORT || 5000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
+http.listen((process.env.PORT || 5000), () => console.log('Started server'))
 
