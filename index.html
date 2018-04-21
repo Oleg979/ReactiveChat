@@ -102,7 +102,7 @@
         </ul>
         <div class="msg-wrapper">
             <input type="text" v-model="message" v-on:keydown="send" placeholder="Type your message..." id="msg">
-            <input type="text" v-model="name" v-on:keydown="setName" placeholder="Change your name..."  id="name">
+            <input type="text" v-model="name" v-on:keydown="setName" placeholder="Change your name..." autocomplete="off" id="name">
             <div class="typing"><span class="type">{{typing}}</span></div>
             
         </div>
