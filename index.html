@@ -161,6 +161,8 @@
                 },
                 created: function () {
                     socket.on('message', function (message) {
+                        document.title = "New message!"
+                        setTimeout(() => document.title = "Chat", 1000)
                         console.log(message)
                         this.messages.push(message)
                         this.typing = ''
