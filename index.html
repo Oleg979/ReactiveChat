@@ -10,15 +10,20 @@
             color: #555;
             font-weight: bold;
             font: 100% "Oswald";
+            background-color: lightcyan;
+            scroll-behavior: smooth;
         }
         .chat {
             width: 100%;
         }
         .chat-list {
+            width: 70%;
+            margin: 0 auto;
+            display: block;
             list-style-type: none;
             padding: 0;
-            margin: 0;
-            margin-bottom: 125px;
+            margin-top: 10px;
+            margin-bottom: 140px;
             z-index: 0;
         }
         .chat-list-item {
@@ -26,9 +31,11 @@
             font-size: .9em;
             z-index: 0;
             border-bottom: 2px solid #555555;
+            border-left: 2px solid #555555;
+            border-right: 2px solid #555555;
         }
-        .end {
-
+        .chat-list-item:first-of-type {
+            border-top: 2px solid #555555;
         }
         .panel {
             width:20%;
@@ -123,6 +130,7 @@
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
             var socket = io()
+            setTimeout(() => window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight), 100)
             new Vue({
                 el: '.chat',
                 data: {
@@ -155,7 +163,7 @@
                         console.log(message)
                         this.messages.push(message)
                         this.typing = ''
-                        document.getElementsByClassName("empty")[0].scrollIntoView(false);
+                        document.getElementsByClassName("empty")[0].scrollIntoView(false)
                     }.bind(this))
                     socket.on('typing', function (message) {
                         this.typing = message
