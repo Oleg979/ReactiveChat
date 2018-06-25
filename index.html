@@ -135,7 +135,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
-    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
             var socket = io()
             setTimeout(() => window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight), 100)
@@ -187,6 +187,7 @@
                     }.bind(this))
 
                     socket.on('connected', function() {
+                        console.log(this.membersCount + 1)
                         this.membersCount++
                     }.bind(this))
 
