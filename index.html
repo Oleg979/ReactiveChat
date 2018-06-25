@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <title>Chat</title>
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" />
-    <link rel="shortcut icon" href="http://htmlbook.ru/favicon.ico">
     <style>
         body, html {
             margin: 0;
@@ -49,6 +48,13 @@
         }
         .chat-list-item:nth-child(odd) {
             background-color: #f5f5f5;
+        }
+        .membersCount {
+            position: fixed;
+            z-index: 1;
+            font-size: 1.5em;
+            right: 20px;
+            bottom: 100px;
         }
         .msg-wrapper {
             width:100%;
@@ -118,6 +124,7 @@
             </li>
         </ul>
 
+        <div class="membersCount">Members in chat: {{membersCount}}</div>
         <div class="msg-wrapper">
             <input type="text" v-model="message" v-on:keydown="send" placeholder="Type your message..." id="msg">
             <input type="text" v-model="name" v-on:keydown="setName" placeholder="Change your name..."  id="name" autocomplete="off">
@@ -139,7 +146,8 @@
                     name: '',
                     typing: '',
                     interval: null,
-                    messages: []
+                    messages: [],
+                    membersCount: 0
                 },
                 methods: {
                     send: function (e) {
@@ -160,6 +168,7 @@
                     }
                 },
                 created: function () {
+
                     socket.on('message', function (message) {
                         document.title = "New message!"
                         setTimeout(() => document.title = "Chat", 1000)
@@ -168,12 +177,25 @@
                         this.typing = ''
                         document.getElementsByClassName("empty")[0].scrollIntoView(false)
                     }.bind(this))
+
                     socket.on('typing', function (message) {
                         this.typing = message
                         if (!this.interval) this.interval = setTimeout(() => {
                             this.interval = null
                             this.typing = ''
                         }, 2000)
+                    }.bind(this))
+
+                    socket.on('connected', function() {
+                        this.membersCount++
+                    }.bind(this))
+
+                    socket.on('disconnected', function() {
+                        this.membersCount--
+                    }.bind(this))
+
+                    socket.on('members', function(count) {
+                        this.membersCount = count
                     }.bind(this))
                 }
 
