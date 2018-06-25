@@ -87,6 +87,15 @@
             width: 20%;
             display: inline-block;
         }
+        .newMemberAnim {
+            animation: newMember .5s linear;
+            transition: all .5s ease;
+        }
+        @keyframes newMember {
+            0% {transform: scale(1, 1)}
+            50% {transform: scale(1.2, 1.2); color: red}
+            100% {transform: scale(1, 1)}
+        }
         @media screen and (max-width: 1092px) {
             .type {
                 margin-top: 10px;
@@ -187,19 +196,22 @@
                     }.bind(this))
 
                     socket.on('connected', function() {
-                        console.log(this.membersCount + 1)
+                        document.getElementsByClassName("membersCount")[0].classList.add("newMemberAnim")
+                        setTimeout(() => document.getElementsByClassName("membersCount")[0].classList.remove("newMemberAnim"), 700)
                         this.membersCount++
                     }.bind(this))
 
                     socket.on('disconnected', function() {
+                        document.getElementsByClassName("membersCount")[0].classList.add("newMemberAnim")
+                        setTimeout(() => document.getElementsByClassName("membersCount")[0].classList.remove("newMemberAnim"), 700)
                         this.membersCount--
                     }.bind(this))
 
                     socket.on('members', function(count) {
                         this.membersCount = count
                     }.bind(this))
-                }
 
+                }
             })
         </script>
 </body>
