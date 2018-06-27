@@ -1,0 +1,115 @@
+body, html {
+    margin: 0;
+    color: #555;
+    font-weight: bold;
+    font: 100% "Oswald";
+    background-color: lightcyan;
+    scroll-behavior: smooth;
+}
+.chat {
+    width: 100%;
+}
+.chat-list {
+    width: 70%;
+    margin: 0 auto;
+    display: block;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 140px;
+    z-index: 0;
+}
+.chat-list-item {
+    padding: 10px;
+    font-size: .9em;
+    z-index: 0;
+    border-bottom: 2px solid #555555;
+    border-left: 2px solid #555555;
+    border-right: 2px solid #555555;
+}
+.chat-list-item:first-of-type {
+    border-top: 2px solid #555555;
+}
+.panel {
+    width:20%;
+    z-index: 0;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 125px;
+    background-color: aqua;
+    height: 100%;
+}
+.membersCount {
+    position: fixed;
+    z-index: 1;
+    font-size: 1.5em;
+    right: 20px;
+    bottom: 100px;
+}
+.msg-wrapper {
+    width:100%;
+    position:fixed;
+    bottom:0;
+    padding: 20px;
+    border-top: 3px solid #c9c5c5;
+    font-size: .9em;
+    z-index: 1;
+    background-color: white;
+}
+#msg {
+    display: inline-block;
+    font: 100% "Oswald";
+    padding: 10px;
+    width: 60%;
+}
+#name {
+    display: inline-block;
+    padding: 10px;
+    width: 15%;
+    font: 100% "Oswald";
+}
+.type {
+
+    font-size: 150%
+}
+.typing {
+    text-align: center;
+    width: 20%;
+    display: inline-block;
+}
+.newMemberAnim {
+    animation: newMember .5s linear;
+    transition: all .5s ease;
+}
+@keyframes newMember {
+    0% {transform: scale(1, 1)}
+    50% {transform: scale(1.2, 1.2); color: red}
+    100% {transform: scale(1, 1)}
+}
+@media screen and (max-width: 1092px) {
+    .type {
+        margin-top: 10px;
+        display:block;
+    }
+    #name {
+        width: 25%;
+    }
+    .typing {
+        text-align: center;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 487px) {
+    .type, #msg, #name {
+        display:block;
+        width: 70%;
+    }
+    #name {
+        margin: 10px 0;
+
+    }
+    .typing {
+        display: block;
+        width: 100%;
+    }
+}
