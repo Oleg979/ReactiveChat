@@ -1,10 +1,12 @@
 //Делаем импорт
-var app = require('express')()
-var http = require('http').Server(app)
-var io = require('socket.io')(http)
+const express = require('express');
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 
 const pushAndEmit = msg => {
+    if(msgs.length >= maxLen) msgs = []
     msgs.push(msg)
     io.emit('message', msg)
 }
@@ -13,15 +15,18 @@ const pushAndEmit = msg => {
 
 //Запускаем рутовый маршрут
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + '/public/index.html')
 })
 
+//Указываем путь к статическим файлам
+app.use(express.static(__dirname + '/public'))
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Параметры чата
 let msgs = []
 let membersCount = 0
+const maxLen = 100
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -96,5 +101,6 @@ io.on('connection', (socket) => {
 })
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var port = process.env.PORT || 3000
+
+const port = process.env.PORT || 3000;
 http.listen(port, () => console.log('Started server'))
