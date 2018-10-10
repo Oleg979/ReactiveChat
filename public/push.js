@@ -1,6 +1,6 @@
 !function(p,u,s,h,m,e){p.__cmbk=p.__cmbk||function(){(p.__cmbk.q=p.__cmbk.q
     || []).push(arguments)};m=u.createElement(s);e=u.getElementsByTagName(s)[0];m.async=!0;m.src=h;
-    e.parentNode.insertBefore(m,e);}(window,document,'script','//<your project domain>.push.expert/js/integration.js');
+    e.parentNode.insertBefore(m,e);}(window,document,'script','//siltstrider.push.expert/js/integration.js');
 
     // назначить текущему токену тег(при регистрации)
     __cmbk('setRegistrationTag','test-users');
